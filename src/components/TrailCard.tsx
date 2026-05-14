@@ -14,7 +14,7 @@ const seasonIcon: Record<Trail["season"], typeof Sun | null> = {
   all_year: null,
 };
 
-export function TrailCard({ trail }: { trail: Trail }) {
+export function TrailCard({ trail, showWinter = false }: { trail: Trail; showWinter?: boolean }) {
   const { t } = useTranslation();
   const isKayak = trail.type === "kayak";
   const isCycling = ["cycling", "mtb", "gravel", "fatbike"].includes(trail.type);
@@ -41,7 +41,7 @@ export function TrailCard({ trail }: { trail: Trail }) {
     >
       <div className="relative aspect-[16/10] overflow-hidden bg-muted">
         <img
-          src={trail.image}
+          src={showWinter && trail.winterImage ? trail.winterImage : trail.image}
           alt={trail.name}
           loading="lazy"
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"

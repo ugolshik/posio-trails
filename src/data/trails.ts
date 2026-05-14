@@ -8,6 +8,10 @@ import palotunturi from "@/assets/trail-palotunturi.jpg";
 import kayak from "@/assets/trail-kayak.jpg";
 import kayak2 from "@/assets/trail-kayak2.jpg";
 import lake from "@/assets/trail-lake.jpg";
+import riisiWinter from "@/assets/trail-riisi-winter.jpg";
+import riisi2Winter from "@/assets/trail-riisi2-winter.jpg";
+import korouomaWinter from "@/assets/trail-korouoma-winter.jpg";
+import palotunturiWinter from "@/assets/trail-palotunturi-winter.jpg";
 
 export type TrailType = "hiking" | "cycling" | "mtb" | "gravel" | "fatbike" | "kayak";
 export type Difficulty = "easy" | "medium" | "demanding";
@@ -34,6 +38,7 @@ export interface Trail {
   startPoint: { name: string; address: string; coords: [number, number] };
   links: { label: string; url: string }[];
   image: string;
+  winterImage?: string;
   routeCoords: [number, number][];
 }
 
@@ -62,6 +67,7 @@ export const trails: Trail[] = [
     },
     links: [{ label: "nationalparks.fi", url: "https://www.nationalparks.fi/riisitunturinp" }],
     image: riisi,
+    winterImage: riisiWinter,
     routeCoords: [
       [66.180, 28.140], [66.188, 28.125], [66.198, 28.128],
       [66.204, 28.140], [66.202, 28.155], [66.194, 28.165],
@@ -92,6 +98,7 @@ export const trails: Trail[] = [
     },
     links: [{ label: "nationalparks.fi", url: "https://www.nationalparks.fi/riisitunturinp" }],
     image: riisi2,
+    winterImage: riisi2Winter,
     routeCoords: [
       [66.180, 28.140], [66.195, 28.108], [66.210, 28.112],
       [66.222, 28.130], [66.228, 28.155], [66.220, 28.185],
@@ -125,6 +132,7 @@ export const trails: Trail[] = [
     },
     links: [{ label: "nationalparks.fi", url: "https://www.nationalparks.fi/korouoma" }],
     image: korouoma,
+    winterImage: korouomaWinter,
     routeCoords: [
       [66.310, 27.700], [66.305, 27.712], [66.298, 27.728],
       [66.291, 27.742], [66.285, 27.755], [66.280, 27.762],
@@ -185,6 +193,7 @@ export const trails: Trail[] = [
     },
     links: [],
     image: palotunturi,
+    winterImage: palotunturiWinter,
     routeCoords: [
       [66.100, 28.160], [66.108, 28.148], [66.117, 28.152],
       [66.120, 28.165], [66.114, 28.178], [66.104, 28.174],
