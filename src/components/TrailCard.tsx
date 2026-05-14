@@ -1,4 +1,4 @@
-import { Clock, Route as RouteIcon, MapPin, Mountain, Bike, Waves, ArrowRight, Sun, Snowflake } from "lucide-react";
+import { Clock, Route as RouteIcon, MapPin, Mountain, Bike, Waves, ArrowRight, Sun, Snowflake, Lightbulb } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import type { Trail } from "@/data/trails";
 
@@ -18,8 +18,15 @@ export function TrailCard({ trail, showWinter = false }: { trail: Trail; showWin
   const { t } = useTranslation();
   const isKayak = trail.type === "kayak";
   const isCycling = ["cycling", "mtb", "gravel", "fatbike"].includes(trail.type);
-  const TypeIcon = isKayak ? Waves : isCycling ? Bike : Mountain;
-  const typeLabel = isKayak ? t("common.kayak") : isCycling ? t("common.cycling") : t("common.hiking");
+  const isSkiing = trail.type === "skiing";
+  const TypeIcon = isKayak ? Waves : isCycling ? Bike : isSkiing ? Snowflake : Mountain;
+  const typeLabel = isKayak
+    ? t("common.kayak")
+    : isCycling
+    ? t("common.cycling")
+    : isSkiing
+    ? t(`common.skiStyle_${trail.skiStyle ?? "skating"}` as const)
+    : t("common.hiking");
 
   const statusLabel: Record<Trail["status"], string> = {
     open: t("common.open"),
@@ -53,12 +60,20 @@ export function TrailCard({ trail, showWinter = false }: { trail: Trail; showWin
           <TypeIcon className="h-3.5 w-3.5" strokeWidth={1.75} />
           {typeLabel}
         </span>
-        {SeasonIcon && (
-          <span className="absolute bottom-3 right-3 inline-flex items-center gap-1 rounded-md bg-background/85 px-2 py-1 text-xs font-medium text-foreground backdrop-blur">
-            <SeasonIcon className="h-3.5 w-3.5" strokeWidth={1.75} />
-            {trail.season === "winter" ? t("common.winter") : t("common.summer")}
-          </span>
-        )}
+        <div className="absolute bottom-3 right-3 flex flex-col items-end gap-1">
+          {trail.lit && (
+            <span className="inline-flex items-center gap-1 rounded-md bg-amber-400/90 px-2 py-1 text-xs font-medium text-amber-900 backdrop-blur">
+              <Lightbulb className="h-3.5 w-3.5" strokeWidth={1.75} />
+              {t("common.lit")}
+            </span>
+          )}
+          {SeasonIcon && (
+            <span className="inline-flex items-center gap-1 rounded-md bg-background/85 px-2 py-1 text-xs font-medium text-foreground backdrop-blur">
+              <SeasonIcon className="h-3.5 w-3.5" strokeWidth={1.75} />
+              {trail.season === "winter" ? t("common.winter") : t("common.summer")}
+            </span>
+          )}
+        </div>
       </div>
       <div className="flex flex-1 flex-col gap-3 p-5">
         <div>

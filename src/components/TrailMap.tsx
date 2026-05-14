@@ -9,6 +9,7 @@ const TYPE_COLOR: Record<Trail["type"], string> = {
   gravel: "#f97316",
   fatbike: "#f97316",
   kayak: "#3b82f6",
+  skiing: "#22d3ee",
 };
 
 interface Props {
@@ -130,6 +131,10 @@ export function TrailMap({ trails, heightClass = "h-[420px]", fitBounds = false,
           <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
             <span className="inline-block h-3 w-3 rounded-full bg-[#3b82f6]" />
             {t("common.kayak")}
+          </span>
+          <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+            <span className="inline-block h-3 w-3 rounded-full bg-[#22d3ee]" />
+            {t("common.skiing")}
           </span>
         </div>
       )}

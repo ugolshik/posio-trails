@@ -8,12 +8,13 @@ import palotunturi from "@/assets/trail-palotunturi.jpg";
 import kayak from "@/assets/trail-kayak.jpg";
 import kayak2 from "@/assets/trail-kayak2.jpg";
 import lake from "@/assets/trail-lake.jpg";
+import kattavalahti from "@/assets/trail-kattavalahti.jpg";
 import riisiWinter from "@/assets/trail-riisi-winter.jpg";
 import riisi2Winter from "@/assets/trail-riisi2-winter.jpg";
 import korouomaWinter from "@/assets/trail-korouoma-winter.jpg";
 import palotunturiWinter from "@/assets/trail-palotunturi-winter.jpg";
 
-export type TrailType = "hiking" | "cycling" | "mtb" | "gravel" | "fatbike" | "kayak";
+export type TrailType = "hiking" | "cycling" | "mtb" | "gravel" | "fatbike" | "kayak" | "skiing";
 export type Difficulty = "easy" | "medium" | "demanding";
 export type Status = "open" | "partially_closed" | "seasonal";
 export type Season = "all_year" | "summer" | "winter";
@@ -40,6 +41,8 @@ export interface Trail {
   image: string;
   winterImage?: string;
   routeCoords: [number, number][];
+  lit?: boolean;
+  skiStyle?: "skating" | "classic" | "both";
 }
 
 export const trails: Trail[] = [
@@ -322,6 +325,41 @@ export const trails: Trail[] = [
     ],
   },
   {
+    id: "kattavalahti-bay-loop",
+    name: "Kattavalahti Bay Loop",
+    park: "Local — Posio",
+    shortDescription: "Sheltered bay circuit launching from the Lapin Satu pier, circling the quiet Kattavalahti inlet.",
+    description:
+      "Launch from the municipal slipway beside Hotel Lapin Satu and paddle a full circuit of Kattavalahti, the sheltered bay that wraps around the Kattavaniemi headland. The water is calm and the forested shoreline makes this a perfect first paddle in the Posio area. The northern arm broadens into the main body of Posionjärvi, where you may spot white-tailed eagles fishing the shallows. Finish by rounding the tip of the headland and gliding back to the slipway. No portages, no rapids — just quiet boreal lake paddling a short walk from your accommodation.",
+    type: "kayak",
+    difficulty: "easy",
+    lengthKm: 3.1,
+    durationHours: [2, 3],
+    loop: true,
+    distanceFromPosioKm: 2,
+    status: "seasonal",
+    season: "summer",
+    facilities: ["parking", "water"],
+    tags: ["bay", "calm", "hotel", "beginner", "lake"],
+    startPoint: {
+      name: "Lapin Satu municipal slipway",
+      address: "Kattavaniementie 1, 97900 Posio",
+      coords: [66.095187, 28.135625],
+    },
+    links: [{ label: "Hotel Lapin Satu", url: "https://lapinsatu.com/en" }],
+    image: kattavalahti,
+    routeCoords: [
+      [66.095194, 28.135639],
+      [66.096436, 28.130270],
+      [66.098322, 28.131839],
+      [66.101492, 28.133515],
+      [66.101907, 28.117205],
+      [66.099094, 28.129122],
+      [66.094211, 28.129289],
+      [66.095173, 28.135624],
+    ],
+  },
+  {
     id: "oulanka-canoe-route",
     name: "Oulankajoki Canoe Route",
     park: "Oulanka National Park",
@@ -353,6 +391,223 @@ export const trails: Trail[] = [
       [66.270, 29.380], [66.272, 29.418], [66.276, 29.458],
       [66.281, 29.498], [66.287, 29.538], [66.293, 29.578],
       [66.298, 29.618],
+    ],
+  },
+  {
+    id: "kotivaaran-latu",
+    name: "Kotivaaran latu",
+    park: "Local — Posio",
+    shortDescription: "Lit 5 km skating loop behind Posio sports field — groomed nightly, lit until 21:00.",
+    description:
+      "The main lit cross-country skiing loop in Posio, starting from the municipal sports field on Maaninkavaarantie. The track winds through the Kotivaara hill terrain with a few short climbs, making it a proper workout despite its compact length. It is machine-groomed for skating style (luistelutyyli) and illuminated until 21:00, so evening laps are possible even in the darkest weeks of January. One of the earliest trails to be prepared each season and the easiest to reach from the village centre. Dogs are not permitted on this track.",
+    type: "skiing",
+    difficulty: "medium",
+    lengthKm: 5,
+    durationHours: [0.5, 1.5],
+    loop: true,
+    distanceFromPosioKm: 0,
+    status: "seasonal",
+    season: "winter",
+    lit: true,
+    skiStyle: "skating",
+    facilities: ["parking", "lit_track"],
+    tags: ["lit", "skating", "training", "village"],
+    startPoint: {
+      name: "Posio sports field",
+      address: "Maaninkavaarantie 1, 97900 Posio",
+      coords: [66.1107, 28.1760],
+    },
+    links: [
+      { label: "infogis.fi/posio — real-time trail conditions", url: "https://www.infogis.fi/posio/" },
+      { label: "outdooractive.fi", url: "https://www.outdooractive.fi/fi/route/maastohiihto/posio/kotivaaran-latu-5km-/55297315/" },
+    ],
+    image: palotunturiWinter,
+    routeCoords: [
+      [66.1107, 28.1760], [66.1145, 28.1715], [66.1195, 28.1740],
+      [66.1228, 28.1828], [66.1212, 28.1922], [66.1158, 28.1965],
+      [66.1098, 28.1942], [66.1058, 28.1868], [66.1068, 28.1792],
+      [66.1107, 28.1760],
+    ],
+  },
+  {
+    id: "kirintövaaran-ladut",
+    name: "Kirintövaaran ladut",
+    park: "Local — Posio",
+    shortDescription: "Lit 15 km ski network at Kirintövaara fell — classic & skating, illuminated until 21:00.",
+    description:
+      "The main ski trail network in Posio, set around the Kirintövaara fell about 8 km from the village centre. Roughly 15 km of groomed terrain with a mix of open fell traverses and forested climbs, rated medium difficulty. Both classic (perinteinen) and skating (vapaa) tracks are prepared and illuminated until 21:00 — evening laps are possible throughout the season. This is the most versatile ski destination in the Posio area; shorter inner loops can be combined or linked with the Pentik-mäki connector for a longer outing. Ski rental available nearby at Lomakeskus Himmerki (approx. 15 €/day). Check infogis.fi/posio for grooming status before you go.",
+    type: "skiing",
+    difficulty: "medium",
+    lengthKm: 15,
+    durationHours: [1, 2.5],
+    loop: true,
+    distanceFromPosioKm: 8,
+    status: "seasonal",
+    season: "winter",
+    lit: true,
+    skiStyle: "both",
+    facilities: ["parking", "lit_track"],
+    tags: ["lit", "skating", "classic", "training", "fell"],
+    startPoint: {
+      name: "Kirintövaara ski centre",
+      address: "Kiririnteentie 1, 97900 Posio",
+      coords: [66.1485, 28.2050],
+    },
+    links: [
+      { label: "infogis.fi/posio — real-time trail conditions", url: "https://www.infogis.fi/posio/" },
+      { label: "outdooractive.fi", url: "https://www.outdooractive.fi/fi/route/maastohiihto/posio/kirintoevaaran-ladut/58987554/" },
+      { label: "posiolapland.com — ski trails", url: "https://posiolapland.com/hiihtoladut/" },
+    ],
+    image: riisi2Winter,
+    routeCoords: [
+      [66.1485, 28.2050], [66.1550, 28.1970], [66.1630, 28.1910],
+      [66.1700, 28.1990], [66.1730, 28.2130], [66.1700, 28.2280],
+      [66.1620, 28.2370], [66.1530, 28.2340], [66.1460, 28.2230],
+      [66.1430, 28.2120], [66.1485, 28.2050],
+    ],
+  },
+  {
+    id: "pentik-maki-kirintovaara-latu",
+    name: "Pentik-mäki – Kirintövaara latu",
+    park: "Local — Posio",
+    shortDescription: "Lit 13.8 km connector linking the village sports field to Kirintövaara — flat training route for classic and skating.",
+    description:
+      "A long lit training route that runs from the Pentik-mäki area near the village sports field all the way to Kirintövaara, covering 13.8 km of mostly gentle terrain. Because the route is largely flat it works well as a high-volume training trail and also makes a natural warm-up or cool-down leg for a longer Kirintövaara session. Both classic and skating tracks are prepared (perinteinen ja vapaa) and the trail is illuminated until 21:00. Start from the sports field parking on Maaninkavaarantie or from the Erämaahotelli Kirikeskus lot at the Kirintövaara end. Check infogis.fi/posio for real-time grooming status.",
+    type: "skiing",
+    difficulty: "easy",
+    lengthKm: 13.8,
+    durationHours: [1, 2],
+    loop: false,
+    distanceFromPosioKm: 0,
+    status: "seasonal",
+    season: "winter",
+    lit: true,
+    skiStyle: "both",
+    facilities: ["parking", "lit_track"],
+    tags: ["lit", "skating", "classic", "training", "connector"],
+    startPoint: {
+      name: "Pentik-mäki / Posio sports field",
+      address: "Maaninkavaarantie 5, 97900 Posio",
+      coords: [66.0952, 28.1476],
+    },
+    links: [
+      { label: "infogis.fi/posio — real-time trail conditions", url: "https://www.infogis.fi/posio/" },
+      { label: "outdooractive.fi", url: "https://www.outdooractive.fi/fi/route/maastohiihto/finland/pentik-maeki-kirintoevaara-latu-13-8km-/55297512/" },
+    ],
+    image: palotunturiWinter,
+    routeCoords: [
+      [66.0952, 28.1476], [66.1020, 28.1540], [66.1090, 28.1620],
+      [66.1160, 28.1720], [66.1230, 28.1830], [66.1290, 28.1920],
+      [66.1350, 28.1980], [66.1410, 28.2020], [66.1485, 28.2050],
+    ],
+  },
+  {
+    id: "karitunturin-eramaalatu",
+    name: "Karitunturin erämaalatu",
+    park: "Local — Posio",
+    shortDescription: "Demanding 14 km wilderness ski route from Kirintövaara to Karitunturi fell — classic and skating, unlit.",
+    description:
+      "A scenic wilderness route (erämaalatu) running 14 km from the Kirintövaara ski centre to the open summit of Karitunturi fell. The trail climbs significantly on both the approach and descent and is rated demanding — steep sections make it unsuitable for beginners. Both classic and skating tracks are prepared (perinteinen ja vapaa) but the route is not illuminated, so plan to ski it in daylight. The summit section offers wide fell panoramas across the Posio landscape. Start from the Erämaahotelli Kirikeskus parking area at Kirintövaara. Check infogis.fi/posio before setting out — this wilderness route may open later in the season than the village loops.",
+    type: "skiing",
+    difficulty: "demanding",
+    lengthKm: 14,
+    durationHours: [2, 3.5],
+    loop: false,
+    distanceFromPosioKm: 8,
+    status: "seasonal",
+    season: "winter",
+    lit: false,
+    skiStyle: "both",
+    facilities: ["parking"],
+    tags: ["wilderness", "fell", "panorama", "demanding", "classic", "skating"],
+    startPoint: {
+      name: "Erämaahotelli Kirikeskus / Kirintövaara",
+      address: "Kiririnteentie 1, 97900 Posio",
+      coords: [66.1485, 28.2050],
+    },
+    links: [
+      { label: "infogis.fi/posio — real-time trail conditions", url: "https://www.infogis.fi/posio/" },
+      { label: "outdooractive.fi", url: "https://www.outdooractive.fi/fi/route/maastohiihto/finland/karitunturin-eraemaalatu-14km-/59184421/" },
+    ],
+    image: korouomaWinter,
+    routeCoords: [
+      [66.1485, 28.2050], [66.1560, 28.2160], [66.1640, 28.2240],
+      [66.1730, 28.2290], [66.1820, 28.2260], [66.1900, 28.2180],
+      [66.1970, 28.2080], [66.2040, 28.1960], [66.2100, 28.1850],
+    ],
+  },
+  {
+    id: "riisitunturin-ladut",
+    name: "Riisitunturin ladut",
+    park: "Riisitunturi National Park",
+    shortDescription: "Wilderness classic-style ski trails through Riisitunturi crown-snow forest — opens in February.",
+    description:
+      "Classic-style (perinteinen) ski trails winding through the famous crown-snow forests of Riisitunturi National Park. The fell's dense spruce trees build extraordinary tykkylumi (crown snow) formations in midwinter — skiing here between February and March is one of the most visually spectacular experiences in the Posio region. The trails are groomed seasonally and typically do not open until sufficient snow depth has built up, usually from early to mid-February. The terrain reflects the national park environment: undulating fell slopes, open bog sections and forest tracks. The trails are not illuminated — plan a full daylight outing. Use the same Riisitunturi parking area as the hiking trails. Check trail status at infogis.fi/posio.",
+    type: "skiing",
+    difficulty: "medium",
+    lengthKm: 20,
+    durationHours: [2, 4],
+    loop: true,
+    distanceFromPosioKm: 35,
+    status: "seasonal",
+    season: "winter",
+    lit: false,
+    skiStyle: "classic",
+    facilities: ["parking", "toilet"],
+    tags: ["classic", "wilderness", "national-park", "crown-snow", "scenic"],
+    startPoint: {
+      name: "Riisitunturi parking",
+      address: "Patoniementie, 97999 Posio",
+      coords: [66.18, 28.14],
+    },
+    links: [
+      { label: "infogis.fi/posio — real-time trail conditions", url: "https://www.infogis.fi/posio/" },
+      { label: "posiolapland.com — ski trails", url: "https://posiolapland.com/hiihtoladut/" },
+      { label: "Riisitunturin erämaalatu PDF map", url: "https://posiolapland.com/wp-content/uploads/2021/01/Riisitunturin-eramaalatu.pdf" },
+    ],
+    image: riisiWinter,
+    routeCoords: [
+      [66.180, 28.140], [66.190, 28.118], [66.202, 28.108],
+      [66.215, 28.118], [66.224, 28.140], [66.220, 28.165],
+      [66.208, 28.182], [66.194, 28.178], [66.184, 28.165],
+      [66.180, 28.140],
+    ],
+  },
+  {
+    id: "posionjarvi-aurinkolatu",
+    name: "Posionjärven aurinkolatu",
+    park: "Local — Posio",
+    shortDescription: "Flat 16 km classic-style circuit around frozen lake Posionjärvi — ideal for beginners and families.",
+    description:
+      "A beloved 16.2 km classic-style ski circuit (perinteinen tyyli) that loops around frozen lake Posionjärvi and its forested shoreline. The route is almost entirely flat, making it one of the most beginner-friendly long trails in the region. It opens once the lake ice reaches safe thickness — usually January — and typically stays open until late April. On clear days the open lake sections offer wide panoramic views of the surrounding fell landscape. Dogs are welcome on this trail. Trail conditions are updated daily at infogis.fi/posio.",
+    type: "skiing",
+    difficulty: "easy",
+    lengthKm: 16.2,
+    durationHours: [1.5, 3],
+    loop: true,
+    distanceFromPosioKm: 1,
+    status: "seasonal",
+    season: "winter",
+    lit: false,
+    skiStyle: "classic",
+    facilities: ["parking"],
+    tags: ["classic", "flat", "lake", "family", "dogs-welcome"],
+    startPoint: {
+      name: "Posionjärvi trail start",
+      address: "Maaninkavaarantie 5, 97900 Posio",
+      coords: [66.0952, 28.1476],
+    },
+    links: [
+      { label: "infogis.fi/posio — real-time trail conditions", url: "https://www.infogis.fi/posio/" },
+      { label: "outdooractive.com", url: "https://www.outdooractive.com/en/route/cross-country-skiing/finland/posionjaerven-aurinkolatu-skiing-track-16km-/59206510/" },
+    ],
+    image: riisi2Winter,
+    routeCoords: [
+      [66.0952, 28.1476], [66.0892, 28.1522], [66.0822, 28.1582],
+      [66.0752, 28.1632], [66.0682, 28.1602], [66.0622, 28.1522],
+      [66.0582, 28.1432], [66.0592, 28.1312], [66.0642, 28.1202],
+      [66.0712, 28.1152], [66.0792, 28.1182], [66.0862, 28.1232],
+      [66.0922, 28.1312], [66.0952, 28.1476],
     ],
   },
 ];

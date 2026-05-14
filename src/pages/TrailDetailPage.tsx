@@ -13,6 +13,7 @@ import {
   Car,
   Home,
   CircleDot,
+  Lightbulb,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { getTrail, trails, type Trail } from "@/data/trails";
@@ -25,6 +26,7 @@ const facilityIcons: Record<string, { icon: typeof Flame; label: string }> = {
   toilet: { icon: CircleDot, label: "Toilet" },
   water: { icon: Droplets, label: "Drinking water" },
   parking: { icon: Car, label: "Parking" },
+  lit_track: { icon: Lightbulb, label: "Lit track (until 21:00)" },
 };
 
 function Stat({

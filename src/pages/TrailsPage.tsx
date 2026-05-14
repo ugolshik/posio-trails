@@ -5,10 +5,11 @@ import { trails, type TrailType, type Season } from "@/data/trails";
 import { TrailCard } from "@/components/TrailCard";
 import { TrailMap } from "@/components/TrailMap";
 
-type ActivityFilter = "all" | "hiking" | "cycling" | "kayak";
+type ActivityFilter = "all" | "hiking" | "cycling" | "kayak" | "skiing";
 type SeasonFilter = "all" | "summer" | "winter" | "all_year";
 
 const isCycling = (t: TrailType) => ["cycling", "mtb", "gravel", "fatbike"].includes(t);
+const isSkiing = (t: TrailType) => t === "skiing";
 
 export default function TrailsPage() {
   const { t } = useTranslation();
@@ -21,6 +22,7 @@ export default function TrailsPage() {
       if (activity === "hiking" && tr.type !== "hiking") return false;
       if (activity === "cycling" && !isCycling(tr.type)) return false;
       if (activity === "kayak" && tr.type !== "kayak") return false;
+      if (activity === "skiing" && !isSkiing(tr.type)) return false;
       if (season === "summer" && tr.season !== "summer" && tr.season !== "all_year") return false;
       if (season === "winter" && tr.season !== "winter" && tr.season !== "all_year") return false;
       if (season === "all_year" && tr.season !== "all_year") return false;
@@ -51,21 +53,13 @@ export default function TrailsPage() {
       </div>
 
       <div className="mt-8 flex flex-col gap-4">
-        <div className="flex flex-wrap gap-2">
-          {pill("all", t("trails.filterAll"), activity, setActivity)}
-          {pill("hiking", t("trails.filterHiking"), activity, setActivity)}
-          {pill("cycling", t("trails.filterCycling"), activity, setActivity)}
-          {pill("kayak", t("trails.filterKayak"), activity, setActivity)}
-        </div>
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex flex-wrap gap-2">
             <span className="self-center text-xs font-medium uppercase tracking-wider text-muted-foreground">
               {t("trails.season")}:
             </span>
-            {pill("all", t("trails.seasonAll"), season, setSeason)}
             {pill("summer", t("trails.seasonSummer"), season, setSeason)}
             {pill("winter", t("trails.seasonWinter"), season, setSeason)}
-            {pill("all_year", t("trails.seasonAllYear"), season, setSeason)}
           </div>
           <div className="relative w-full sm:max-w-xs">
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" strokeWidth={1.75} />
@@ -77,6 +71,12 @@ export default function TrailsPage() {
               className="w-full rounded-lg border border-input bg-card py-2 pl-9 pr-3 text-sm outline-none transition-colors focus:border-primary"
             />
           </div>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {pill("hiking", t("trails.filterHiking"), activity, setActivity)}
+          {pill("cycling", t("trails.filterCycling"), activity, setActivity)}
+          {pill("kayak", t("trails.filterKayak"), activity, setActivity)}
+          {pill("skiing", t("trails.filterSkiing"), activity, setActivity)}
         </div>
       </div>
 
