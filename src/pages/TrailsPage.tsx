@@ -21,7 +21,9 @@ export default function TrailsPage() {
       if (activity === "hiking" && tr.type !== "hiking") return false;
       if (activity === "cycling" && !isCycling(tr.type)) return false;
       if (activity === "kayak" && tr.type !== "kayak") return false;
-      if (season !== "all" && tr.season !== season) return false;
+      if (season === "summer" && tr.season !== "summer" && tr.season !== "all_year") return false;
+      if (season === "winter" && tr.season !== "winter" && tr.season !== "all_year") return false;
+      if (season === "all_year" && tr.season !== "all_year") return false;
       if (query && !`${tr.name} ${tr.park} ${tr.tags.join(" ")}`.toLowerCase().includes(query.toLowerCase())) return false;
       return true;
     });
