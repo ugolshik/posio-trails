@@ -1,0 +1,124 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+@import "leaflet/dist/leaflet.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-strong: var(--surface-strong);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-soft: var(--primary-soft);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-aurora: var(--aurora);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --shadow-card: 0 1px 3px oklch(0.2 0.04 240 / 0.06), 0 1px 2px oklch(0.2 0.04 240 / 0.04);
+  --shadow-elevated: 0 8px 24px -8px oklch(0.2 0.04 240 / 0.18);
+}
+
+:root {
+  --radius: 0.75rem;
+
+  /* Posio palette — cool nordic */
+  --background: oklch(0.985 0.005 240);          /* #F8FAFC-ish */
+  --foreground: oklch(0.18 0.025 245);            /* near black */
+  --surface: oklch(0.965 0.008 240);              /* #F1F4F8 */
+  --surface-strong: oklch(0.93 0.012 240);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.025 245);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.025 245);
+
+  --primary: oklch(0.52 0.09 215);                /* deep lake teal #0E7490 */
+  --primary-foreground: oklch(0.99 0.005 240);
+  --primary-soft: oklch(0.95 0.03 215);            /* light pill */
+
+  --secondary: oklch(0.94 0.01 240);
+  --secondary-foreground: oklch(0.25 0.03 245);
+
+  --muted: oklch(0.95 0.008 240);
+  --muted-foreground: oklch(0.5 0.02 245);
+
+  --accent: oklch(0.93 0.04 215);
+  --accent-foreground: oklch(0.32 0.07 215);
+
+  --success: oklch(0.65 0.16 150);
+  --warning: oklch(0.72 0.15 70);
+  --danger: oklch(0.62 0.22 25);
+  --aurora: oklch(0.78 0.18 135);
+
+  --destructive: oklch(0.62 0.22 25);
+  --destructive-foreground: oklch(0.99 0.005 240);
+
+  --border: oklch(0.9 0.012 240);
+  --border-strong: oklch(0.78 0.015 240);
+  --input: oklch(0.9 0.012 240);
+  --ring: oklch(0.52 0.09 215);
+}
+
+.dark {
+  --background: oklch(0.16 0.02 240);
+  --foreground: oklch(0.95 0.008 240);
+  --surface: oklch(0.2 0.025 240);
+  --surface-strong: oklch(0.25 0.03 240);
+  --card: oklch(0.2 0.025 240);
+  --card-foreground: oklch(0.95 0.008 240);
+  --popover: oklch(0.2 0.025 240);
+  --popover-foreground: oklch(0.95 0.008 240);
+  --primary: oklch(0.78 0.13 200);
+  --primary-foreground: oklch(0.16 0.02 240);
+  --primary-soft: oklch(0.3 0.05 215);
+  --secondary: oklch(0.26 0.03 240);
+  --secondary-foreground: oklch(0.95 0.008 240);
+  --muted: oklch(0.24 0.025 240);
+  --muted-foreground: oklch(0.7 0.015 240);
+  --accent: oklch(0.3 0.05 215);
+  --accent-foreground: oklch(0.95 0.008 240);
+  --border: oklch(1 0 0 / 0.1);
+  --border-strong: oklch(1 0 0 / 0.2);
+  --input: oklch(1 0 0 / 0.15);
+  --ring: oklch(0.78 0.13 200);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { -webkit-font-smoothing: antialiased; }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+  }
+  h1, h2, h3, h4 { letter-spacing: -0.02em; }
+}
