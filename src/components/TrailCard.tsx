@@ -1,6 +1,7 @@
 import { Clock, Route as RouteIcon, MapPin, Mountain, Bike, Waves, ArrowRight, Sun, Snowflake, Lightbulb } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import type { Trail } from "@/data/trails";
+import { getTrailGallery } from "@/lib/galleryStore";
 
 const statusStyles: Record<Trail["status"], string> = {
   open: "bg-success/15 text-success",
@@ -41,6 +42,11 @@ export function TrailCard({ trail, showWinter = false }: { trail: Trail; showWin
 
   const SeasonIcon = seasonIcon[trail.season];
 
+  const gallery = getTrailGallery(trail.id);
+  const coverImage = gallery?.[0]?.kind === "image"
+    ? gallery[0].src
+    : (showWinter && trail.winterImage ? trail.winterImage : trail.image);
+
   return (
     <a
       href={`/trails/${trail.id}`}
@@ -48,7 +54,7 @@ export function TrailCard({ trail, showWinter = false }: { trail: Trail; showWin
     >
       <div className="relative aspect-[16/10] overflow-hidden bg-muted">
         <img
-          src={showWinter && trail.winterImage ? trail.winterImage : trail.image}
+          src={coverImage}
           alt={trail.name}
           loading="lazy"
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
@@ -80,7 +86,9 @@ export function TrailCard({ trail, showWinter = false }: { trail: Trail; showWin
           <h3 className="text-lg font-semibold leading-tight">{trail.name}</h3>
           <p className="mt-0.5 text-sm text-muted-foreground">{trail.park}</p>
         </div>
-        <p className="line-clamp-2 text-sm text-muted-foreground">{trail.shortDescription}</p>
+        <p className="line-clamp-2 text-sm text-muted-foreground">
+          {t(`trailContent.${trail.id}.shortDescription` as Parameters<typeof t>[0], { defaultValue: trail.shortDescription })}
+        </p>
         <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-1.5 pt-2 text-sm text-foreground/80">
           <span className="inline-flex items-center gap-1.5">
             <RouteIcon className="h-4 w-4 text-muted-foreground" strokeWidth={1.75} />
